@@ -8,7 +8,7 @@ namespace ContainerVervoer
         private readonly List<Pile> _pileList = new List<Pile>();
         public int Columnrow;
         public int Weight;
-        public string Side { get; set; }
+        public Side Side { get; set; }
 
         public Column(int position, int width, int length)
         {

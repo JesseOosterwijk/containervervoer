@@ -138,15 +138,15 @@ namespace ContainerVervoer
             {
                 if (c.Columnrow < middleRow)
                 {
-                    c.Side = "Left";
+                    c.Side = Side.Left;
                 }
                 else if (c.Columnrow > middleRow)
                 {
-                    c.Side = "Right";
+                    c.Side = Side.Right;
                 }
                 else
                 {
-                    c.Side = "Middle";
+                    c.Side = Side.Middle;
                 }
             }
         }
@@ -166,9 +166,9 @@ namespace ContainerVervoer
             {
                 foreach (Column c in _columnList)
                 {
-                    if (c.Side == "Left")
+                    if (c.Side == Side.Left)
                         weightLeftSide = weightLeftSide + c.Weight;
-                    else if (c.Side == "Middle") weightMiddleRow = weightMiddleRow + c.Weight;
+                    else if (c.Side == Side.Middle) weightMiddleRow = weightMiddleRow + c.Weight;
                 }
 
                 int totalWeightMinusMiddleRow = totalWeight - weightMiddleRow;
@@ -182,7 +182,7 @@ namespace ContainerVervoer
             {
                 foreach (Column c in _columnList)
                 {
-                    if (c.Side == "Left")
+                    if (c.Side == Side.Left)
                         weightLeftSide = weightLeftSide + c.Weight;                    
                 }
 

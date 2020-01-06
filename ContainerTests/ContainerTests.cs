@@ -74,9 +74,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceCooledContainersOnOnePile()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(1, 2);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -86,7 +84,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistribution = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistribution = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(false, cDistribution.PlaceAllContainers());
         }
@@ -94,9 +92,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceNormalContainersOnOnePile()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(1, 1);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -106,7 +102,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(false, cDistributor.PlaceAllContainers());
         }
@@ -114,9 +110,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceNormalContainersOnMultiplePiles()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(3, 2);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -126,7 +120,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -134,9 +128,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceNormalContainersOnThreePiles()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(3, 1);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -146,7 +138,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -154,9 +146,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceNormalAndCooledContainers()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(3, 2);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -172,7 +162,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -180,9 +170,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceNormalCooledAndValuableContainers()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(3, 4);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -204,7 +192,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -212,9 +200,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void Place6ValueableContainers()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(3, 4);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -230,7 +216,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -238,9 +224,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceTooManyValueableContainers2()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(4, 4);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -256,7 +240,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(false, cDistributor.PlaceAllContainers());
         }
@@ -264,9 +248,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void Place7ValueableContainers()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(3, 4);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -276,17 +258,15 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(false, cDistributor.PlaceAllContainers());
         }
 
         [TestMethod]
         public void CheckWeightEvenShipWidth()
-        {
-            List<Ship> shipList = new List<Ship>();
+        { 
             Ship ship = new Ship(6, 1);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -296,7 +276,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -304,9 +284,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void CheckWeightOddShipWidth()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(5, 1);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -316,7 +294,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(true, cDistributor.PlaceAllContainers());
         }
@@ -324,9 +302,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceTooManyValueableContainers()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(4, 4);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -342,7 +318,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(false, cDistributor.PlaceAllContainers());
         }
@@ -350,9 +326,7 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PlaceValueableContainersWithOnly1Row()
         {
-            List<Ship> shipList = new List<Ship>();
             Ship ship = new Ship(1, 1);
-            shipList.Add(ship);
 
             List<Container> containerList = new List<Container>();
 
@@ -362,7 +336,7 @@ namespace Containerschip_TestProject
                 containerList.Add(container);
             }
 
-            ContainerDistribution cDistributor = new ContainerDistribution(shipList, containerList);
+            ContainerDistribution cDistributor = new ContainerDistribution(ship, containerList);
 
             Assert.AreEqual(false, cDistributor.PlaceAllContainers());
         }

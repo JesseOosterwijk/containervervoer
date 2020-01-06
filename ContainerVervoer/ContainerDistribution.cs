@@ -5,13 +5,13 @@ namespace ContainerVervoer
 {
     public class ContainerDistribution
     {
-        public List<Ship> ShipList { get; }
+        public Ship _ship { get; }
         public IEnumerable<Container> ContainerList { get; }
         public int WeightOfAllContainers;
 
-        public ContainerDistribution(List<Ship> shipList, IEnumerable<Container> containerList)
+        public ContainerDistribution(Ship ship, IEnumerable<Container> containerList)
         {
-            ShipList = shipList;
+            _ship = ship;
             ContainerList = containerList.OrderByDescending(w => w.Weight);
             WeightOfAllContainers = CalculateTotalWeight();
             SortContainers();
@@ -34,32 +34,32 @@ namespace ContainerVervoer
 
         private bool PlaceCooledContainers()
         {
-            return ContainerList.Where(c => c.Type.Equals(ContainerType.Cooled)).All(c => ShipList[0].LoadCooledContainer(c) != false);
+            return ContainerList.Where(c => c.Type.Equals(ContainerType.Cooled)).All(c => _ship.LoadCooledContainer(c) != false);
         }
 
         private bool PlaceNormalContainers()
         {
-            return ContainerList.Where(c => c.Type.Equals(ContainerType.Normal)).All(c => ShipList[0].LoadNormalContainer(c) != false);
+            return ContainerList.Where(c => c.Type.Equals(ContainerType.Normal)).All(c => _ship.LoadNormalContainer(c) != false);
         }
 
         private bool PlaceValueableContainers()
         {
-            return ContainerList.Where(c => c.Type.Equals(ContainerType.Valuable)).All(c => ShipList[0].LoadValuableContainer(c) != false);
+            return ContainerList.Where(c => c.Type.Equals(ContainerType.Valuable)).All(c => _ship.LoadValuableContainer(c) != false);
         }
 
         public List<Container> GetLoadedContainers()
         {
-            return ShipList[0].GetAllContainers();
+            return _ship.GetAllContainers();
         }
 
         private bool ShipInBalance()
         {
-            return ShipList[0].CheckWeightOfShip(CalculateTotalWeight());
+            return _ship.CheckWeightOfShip(CalculateTotalWeight());
         }
 
         private bool MinimumWeightIsReached()
         {
-            return ShipList[0].MinimumWeightIsReached(WeightOfAllContainers);
+            return _ship.MinimumWeightIsReached(WeightOfAllContainers);
         }
     }
 }
