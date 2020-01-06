@@ -15,7 +15,7 @@ namespace Visualiser
             InitializeComponent();
         }
 
-        private void btnAddShip_Click(object sender, EventArgs e)
+        private void BtnAddShip_Click(object sender, EventArgs e)
         {
             int widthShip = Convert.ToInt32(nUDWidthOfShip.Value);
             int lengthShip = Convert.ToInt32(nUDLengthShip.Value);
@@ -24,7 +24,7 @@ namespace Visualiser
             lboxShip.Items.Add(ship);
         }
 
-        private void btnAddContainer_Click(object sender, EventArgs e)
+        private void BtnAddContainer_Click(object sender, EventArgs e)
         {
             int containerWeight = Convert.ToInt32(nUDContainerWeight.Value);
             bool add = true;
@@ -49,7 +49,7 @@ namespace Visualiser
             lboxContainers.Items.Add(container.ToString());
         }
 
-        private void btnCalculateOptimalLayout_Click(object sender, EventArgs e)
+        private void BtnCalculateOptimalLayout_Click(object sender, EventArgs e)
         {
             ContainerDistribution containerDistribution = new ContainerDistribution(_shipList[0], _containerList);
             if (containerDistribution.PlaceAllContainers() == true)
