@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace ContainerVervoer
 {
-    public class Column
+    public class Row
     {
-        private readonly List<Pile> _pileList = new List<Pile>();
+        public readonly List<Stack> Stacks = new List<Stack>();
         public int Columnrow;
         public int Weight;
         public Side Side { get; set; }
 
-        public Column(int position, int width, int length)
+        public Row(int position, int width, int length)
         {
             Columnrow = position;
             CreatePiles(length);
@@ -20,20 +20,20 @@ namespace ContainerVervoer
         {
             for (int i = 1; i <= length; i++)
             {
-                _pileList.Add(new Pile(i, this));
+                Stacks.Add(new Stack(i, this));
             }
         }
 
-        public List<Pile> GetPiles()
+        public List<Stack> GetPiles()
         {
-            return _pileList;
+            return Stacks;
         }
 
         public int CalculateWeightInColumn()
         {
             int weight = 0;
 
-            foreach (Pile p in _pileList)
+            foreach (Stack p in Stacks)
             {
                 weight = weight + p.Weight;
             }
@@ -43,9 +43,9 @@ namespace ContainerVervoer
 
         public bool LoadCooledContainer(Container c)
         {
-            IEnumerable<Pile> pilesSortedOnWeight = SortPilesOnWeight();
+            IEnumerable<Stack> pilesSortedOnWeight = SortPilesOnWeight();
 
-            foreach (Pile p in pilesSortedOnWeight)
+            foreach (Stack p in pilesSortedOnWeight)
             {
                 if (p.LoadCooledContainer(c))
                 {
@@ -58,9 +58,9 @@ namespace ContainerVervoer
 
         public bool LoadNormalContainer(Container c)
         {
-            IEnumerable<Pile> pilesSortedOnWeight = SortPilesOnWeight();
+            IEnumerable<Stack> pilesSortedOnWeight = SortPilesOnWeight();
 
-            foreach (Pile p in pilesSortedOnWeight)
+            foreach (Stack p in pilesSortedOnWeight)
             {
                 if (p.LoadNormalContainer(c))
                 {
@@ -76,32 +76,32 @@ namespace ContainerVervoer
             Weight = Weight + c.Weight;
         }
 
-        public IEnumerable<Pile> SortPilesOnWeight()
+        public IEnumerable<Stack> SortPilesOnWeight()
         {
-            IEnumerable<Pile> sortedPileList = _pileList.OrderBy(x => x.Weight);
+            IEnumerable<Stack> sortedPileList = Stacks.OrderBy(x => x.Weight);
             return sortedPileList;
         }
 
         //TODO: Unit Testing
-        public bool IsContainerAccessible(Pile p)
+        public bool IsContainerAccessible(Stack p)
         {
             // Front and back blocked.
-            if (_pileList.Count == 1)
+            if (Stacks.Count == 1)
             {
                 return false;
             }
             // First Pile
             else if (p.X == 1)
             {
-                if (p.HeightOfPile() + 1 <= _pileList[1].HeightOfPile())
+                if (p.HeightOfPile() + 1 <= Stacks[1].HeightOfPile())
                 {
                     return false;
                 }
             }
             // Last Pile
-            else if (p.X == _pileList.Count)
+            else if (p.X == Stacks.Count)
             {
-                if (p.HeightOfPile() + 1 <= _pileList[_pileList.Count - 1].HeightOfPile())
+                if (p.HeightOfPile() + 1 <= Stacks[Stacks.Count - 1].HeightOfPile())
                 {
                     return false;
                 }
@@ -110,9 +110,9 @@ namespace ContainerVervoer
             else
             {
                 // Previous pile
-                if (p.HeightOfPile() + 1 > _pileList[p.X - 1].HeightOfPile()) return true;
+                if (p.HeightOfPile() + 1 > Stacks[p.X - 1].HeightOfPile()) return true;
                 // Next pile
-                if (p.HeightOfPile() + 1 <= _pileList[p.X].HeightOfPile())
+                if (p.HeightOfPile() + 1 <= Stacks[p.X].HeightOfPile())
                 {
                     return false;
                 }
@@ -126,15 +126,15 @@ namespace ContainerVervoer
             // First Pile
             if (c.Pile.X == 1)
             {
-                if (c.Y <= _pileList[1].HeightOfPile())
+                if (c.Y <= Stacks[1].HeightOfPile())
                 {
                     return false;
                 }
             }
             // Last Pile
-            else if (c.Pile.X == _pileList.Count)
+            else if (c.Pile.X == Stacks.Count)
             {
-                if (c.Y <= _pileList[_pileList.Count - 2].HeightOfPile())
+                if (c.Y <= Stacks[Stacks.Count - 2].HeightOfPile())
                 {
                     return false;
                 }
@@ -142,8 +142,8 @@ namespace ContainerVervoer
             // In between first and last pile
             else
             {
-                if (c.Y > _pileList[c.Pile.X - 1].HeightOfPile()) return true;
-                if (c.Y <= _pileList[c.Pile.X].HeightOfPile())
+                if (c.Y > Stacks[c.Pile.X - 1].HeightOfPile()) return true;
+                if (c.Y <= Stacks[c.Pile.X].HeightOfPile())
                 {
                     return false;
                 }

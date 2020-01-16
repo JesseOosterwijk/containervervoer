@@ -48,6 +48,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lboxContainers = new System.Windows.Forms.ListBox();
+            this.lblLink = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDWidthOfShip)).BeginInit();
@@ -62,7 +63,7 @@
             this.lboxLoadedContainers.FormattingEnabled = true;
             this.lboxLoadedContainers.Location = new System.Drawing.Point(541, 12);
             this.lboxLoadedContainers.Name = "lboxLoadedContainers";
-            this.lboxLoadedContainers.Size = new System.Drawing.Size(427, 420);
+            this.lboxLoadedContainers.Size = new System.Drawing.Size(672, 420);
             this.lboxLoadedContainers.TabIndex = 19;
             // 
             // btnCalculateOptimalLayout
@@ -73,6 +74,7 @@
             this.btnCalculateOptimalLayout.TabIndex = 18;
             this.btnCalculateOptimalLayout.Text = "Calculate optimal layout";
             this.btnCalculateOptimalLayout.UseVisualStyleBackColor = true;
+            this.btnCalculateOptimalLayout.Click += new System.EventHandler(this.btnCalculateOptimalLayout_Click);
             // 
             // groupBox4
             // 
@@ -114,6 +116,7 @@
             this.btnAddShip.TabIndex = 4;
             this.btnAddShip.Text = "Add";
             this.btnAddShip.UseVisualStyleBackColor = true;
+            this.btnAddShip.Click += new System.EventHandler(this.btnAddShip_Click);
             // 
             // label5
             // 
@@ -191,6 +194,7 @@
             this.btnAddContainer.TabIndex = 5;
             this.btnAddContainer.Text = "Add";
             this.btnAddContainer.UseVisualStyleBackColor = true;
+            this.btnAddContainer.Click += new System.EventHandler(this.btnAddContainer_Click);
             // 
             // nUDContainerWeight
             // 
@@ -264,11 +268,21 @@
             this.lboxContainers.Size = new System.Drawing.Size(242, 394);
             this.lboxContainers.TabIndex = 3;
             // 
+            // lblLink
+            // 
+            this.lblLink.AutoSize = true;
+            this.lblLink.Location = new System.Drawing.Point(32, 459);
+            this.lblLink.Name = "lblLink";
+            this.lblLink.Size = new System.Drawing.Size(30, 13);
+            this.lblLink.TabIndex = 20;
+            this.lblLink.Text = "Link:";
+            // 
             // ContainerShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 450);
+            this.ClientSize = new System.Drawing.Size(1225, 497);
+            this.Controls.Add(this.lblLink);
             this.Controls.Add(this.lboxLoadedContainers);
             this.Controls.Add(this.btnCalculateOptimalLayout);
             this.Controls.Add(this.groupBox4);
@@ -287,6 +301,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContainerWeight)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -312,5 +327,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox lboxContainers;
+        private System.Windows.Forms.Label lblLink;
     }
 }

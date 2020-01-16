@@ -3,24 +3,28 @@ using System.Linq;
 
 namespace ContainerVervoer
 {
-    public class Pile
+    public class Stack
     {
-        public int X { get; set; }
-        public int Weight { get; set; }
-        private Column Column { get; }
-        private readonly List<Container> _containerList = new List<Container>();
+        public int X { get; private set; }
+        public int Weight { get; private set; }
+        private Row Column { get; }
+        internal readonly List<Container> _containerList = new List<Container>();
 
-        public Pile(int x, Column column)
+        public Stack(int x, Row column)
         {
             X = x;
             Column = column;
+        }
+
+        public Row GetColumnPile()
+        {
+            return Column;
         }
 
         public void AddContainer(Container container, int y)
         {
             container.SetHeightPosition(y);
             container.Pile = this;
-            container.Column = Column;
 
             Weight = Weight + container.Weight;
             _containerList.Add(container);
@@ -34,6 +38,7 @@ namespace ContainerVervoer
             }
 
             Container bottomContainer = _containerList.Find(x => x.Y == 1);
+
             int bottomContainerWeight = bottomContainer.Weight;
 
             return Weight - bottomContainerWeight;

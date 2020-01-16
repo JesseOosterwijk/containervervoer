@@ -23,8 +23,8 @@ namespace Containerschip_TestProject
         {
             Ship ship = new Ship(5, 10);
             Ship ship2 = new Ship(10, 5);
-            List<Column> columnList = (List<Column>)ship.GetColumns();
-            List<Column> columnList2 = (List<Column>)ship2.GetColumns();
+            List<Row> columnList = (List<Row>)ship.GetColumns();
+            List<Row> columnList2 = (List<Row>)ship2.GetColumns();
 
             for (int i = 0; i < 5; i++)
             {
@@ -39,25 +39,23 @@ namespace Containerschip_TestProject
         [TestMethod]
         public void PileWeightOnTopOfBottomContainer()
         {
-            Ship ship = new Ship(5, 10);
-            List<Column> columnList = (List<Column>)ship.GetColumns();
-            List<Pile> pileList = columnList[0].GetPiles();
+            Stack pile = new Stack(1, new Row(1, 1, 1));
 
             for (int i = 0; i < 4; i++)
             {
                 Container container = new Container(20000, ContainerType.Normal);
-                pileList[0].AddContainer(container, i);
+                pile.AddContainer(container, i);
             }
 
-            Assert.AreEqual(60000, pileList[0].WeightOnTopOfBottomContainer());
+            Assert.AreEqual(60000, pile.WeightOnTopOfBottomContainer());
         }
 
         [TestMethod]
         public void ColumnWeight()
         {
             Ship ship = new Ship(5, 10);
-            List<Column> columnList = (List<Column>)ship.GetColumns();
-            List<Pile> pileList = columnList[0].GetPiles();
+            List<Row> columnList = (List<Row>)ship.GetColumns();
+            List<Stack> pileList = columnList[0].GetPiles();
 
             for (int i = 1; i < 4; i++)
             {

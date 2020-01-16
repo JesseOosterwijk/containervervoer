@@ -5,8 +5,7 @@
         public int Weight { get; set; }
         public ContainerType Type { get; set; }
         public int Y { get; private set; }
-        public Pile Pile { get; set; }
-        public Column Column { get; set; }
+        public Stack Pile { get; set; }
 
         public Container(int weight, ContainerType containerType)
         {
@@ -22,7 +21,7 @@
         public string ContainerInformation()
         {
             return
-                $"Weight: {Weight}KG, Type: {Type}, on row: {Column.Columnrow}, and on pile: {Pile.X}, Height: {Y}";
+                $"Weight: {Weight}KG, Type: {Type}, on row: {Pile.GetColumnPile()}, and on pile: {Pile.X}, Height: {Y}";
         }
 
         public override string ToString()

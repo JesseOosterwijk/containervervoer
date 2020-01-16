@@ -13,7 +13,7 @@ namespace ContainerVervoer
         {
             _ship = ship;
             ContainerList = containerList.OrderByDescending(w => w.Weight);
-            WeightOfAllContainers = CalculateTotalWeight();
+            _ship.SetWeightOfAllContainers(CalculateTotalWeight());
             SortContainers();
         }
 
@@ -29,7 +29,7 @@ namespace ContainerVervoer
 
         public bool PlaceAllContainers()
         {
-            return MinimumWeightIsReached() && PlaceCooledContainers() && PlaceNormalContainers() && PlaceValueableContainers() && ShipInBalance();
+            return _ship.MinimumWeightIsReached() && PlaceCooledContainers() && PlaceNormalContainers() && PlaceValueableContainers() &&_ship.CheckWeightOfShipIsInBalance();
         }
 
         private bool PlaceCooledContainers()
@@ -47,19 +47,10 @@ namespace ContainerVervoer
             return ContainerList.Where(c => c.Type.Equals(ContainerType.Valuable)).All(c => _ship.LoadValuableContainer(c) != false);
         }
 
+
         public List<Container> GetLoadedContainers()
         {
             return _ship.GetAllContainers();
-        }
-
-        private bool ShipInBalance()
-        {
-            return _ship.CheckWeightOfShip(CalculateTotalWeight());
-        }
-
-        private bool MinimumWeightIsReached()
-        {
-            return _ship.MinimumWeightIsReached(WeightOfAllContainers);
-        }
+        }      
     }
 }
