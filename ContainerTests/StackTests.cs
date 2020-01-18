@@ -1,8 +1,5 @@
 ﻿using ContainerVervoer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ContainerTests
 {
@@ -13,14 +10,16 @@ namespace ContainerTests
         public void StackWeightOnTopOfBottomContainer()
         {
             Stack stack = new Stack(1, new Row(1, 1, 1));
+            int expected = -20000;
 
             for (int i = 0; i < 4; i++)
             {
                 Container container = new Container(20000, ContainerType.Normal);
                 stack.AddContainer(container, i);
+                expected += container.Weight;
             }
 
-            Assert.AreEqual(60000, stack.WeightOnTopOfBottomContainer());
+            Assert.AreEqual(expected, stack.WeightOnTopOfBottomContainer());
         }
     }
 }

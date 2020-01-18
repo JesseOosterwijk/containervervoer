@@ -1,9 +1,7 @@
 ﻿using ContainerVervoer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ContainerTests
 {
@@ -25,16 +23,17 @@ namespace ContainerTests
             Ship ship = new Ship(5, 10);
             List<Row> rowList = (List<Row>)ship.GetRows();
             List<Stack> stackList = rowList[0].GetStacks();
-
+            int expected = 0;
             for (int i = 1; i < 4; i++)
             {
                 for (int y = 1; y < 4; y++)
                 {
                     Container container = new Container(20000, ContainerType.Normal);
                     stackList[i].AddContainer(container, y);
+                    expected += container.Weight;
                 }
            }
-            Assert.AreEqual(60000 * 3, rowList[0].CalculateWeightInRow());
+            Assert.AreEqual(expected, rowList[0].CalculateWeightInRow());
         }
     }
 }

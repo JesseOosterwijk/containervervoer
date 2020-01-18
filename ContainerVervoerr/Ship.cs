@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace ContainerVervoer
@@ -75,10 +74,9 @@ namespace ContainerVervoer
         {
             IEnumerable<Row> sortedRows = Rows.OrderBy(x => x.Weight);
 
-            foreach (Row col in sortedRows)
+            foreach (Row row in sortedRows)
             {
-
-                IEnumerable<Stack> sortedStacks = col.GetStacks().OrderBy(x => x.Weight);
+                IEnumerable<Stack> sortedStacks = row.GetStacks().OrderBy(x => x.Weight);
 
                 foreach (Stack p in sortedStacks)
                 {
@@ -86,7 +84,7 @@ namespace ContainerVervoer
                     if (CheckLoadedValuableContainersAgain() == true)
                     {
                         _loadedContainerList.Add(c);
-                        col.LoadValuableContainer(c);
+                        row.LoadValuableContainer(c);
                         return true;
                     }
                     else
@@ -217,7 +215,7 @@ namespace ContainerVervoer
         {
             foreach (Row row in Rows)
             {
-                foreach (Stack stack in row.Stacks)
+                foreach (Stack stack in row.GetStacks())
                 {
                     var containerListPerStack = stack._containerList.OrderBy(x => x.Y);
                     foreach (var container in containerListPerStack)
@@ -251,7 +249,7 @@ namespace ContainerVervoer
 
             foreach (Row row in Rows)
             {
-                foreach (Stack stack in row.Stacks)
+                foreach (Stack stack in row.GetStacks())
                 {
                     var containerListPerStack = stack._containerList.OrderBy(x => x.Y);
                     foreach (var container in containerListPerStack)

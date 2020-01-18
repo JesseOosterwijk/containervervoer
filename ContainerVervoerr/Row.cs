@@ -5,7 +5,7 @@ namespace ContainerVervoer
 {
     public class Row
     {
-        public readonly List<Stack> Stacks = new List<Stack>();
+        private readonly List<Stack> Stacks = new List<Stack>();
         public int row;
         public int Weight;
         public Side Side { get; set; }
