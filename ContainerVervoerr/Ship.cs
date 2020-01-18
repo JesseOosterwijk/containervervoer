@@ -17,13 +17,13 @@ namespace ContainerVervoer
         {
             Width = width;
             Length = length;
-            CreateColumns();
-            SetColumnToLeftOrRight();
+            CreateRows();
+            SetRowToLeftOrRight();
 
             _maximumWeight = length * width * 149999;
         }
 
-        public IEnumerable<Row> GetColumns()
+        public IEnumerable<Row> GetRows()
         {
             return Rows;
         }
@@ -33,7 +33,7 @@ namespace ContainerVervoer
             return "Width: " + Width + ", Length: " + Length;
         }
 
-        private void CreateColumns()
+        private void CreateRows()
         {
             for (int i = 1; i < Width + 1; i++)
             {
@@ -48,39 +48,39 @@ namespace ContainerVervoer
 
         public bool LoadCooledContainer(Container c)
         {
-            IEnumerable<Row> sortedColumn = SortColumnOnWeight();
+            IEnumerable<Row> sortedRow = SortRowOnWeight();
 
-            if (!sortedColumn.Any(col => col.LoadCooledContainer(c))) return false;
+            if (!sortedRow.Any(col => col.LoadCooledContainer(c))) return false;
             _loadedContainerList.Add(c);
             return true;
         }
 
         public bool LoadNormalContainer(Container c)
         {
-            IEnumerable<Row> sortedColumn = SortColumnOnWeight();
+            IEnumerable<Row> sortedRow = SortRowOnWeight();
 
-            if (!sortedColumn.Any(col => col.LoadNormalContainer(c))) return false;
+            if (!sortedRow.Any(col => col.LoadNormalContainer(c))) return false;
             _loadedContainerList.Add(c);
             return true;
         }
 
-        private IEnumerable<Row> SortColumnOnWeight()
+        private IEnumerable<Row> SortRowOnWeight()
         {
-            IEnumerable<Row> sortedColumns = Rows.OrderBy(x => x.Weight);
+            IEnumerable<Row> sortedRow = Rows.OrderBy(x => x.Weight);
 
-            return sortedColumns;
+            return sortedRow;
         }
 
         public bool LoadValuableContainer(Container c)
         {
-            IEnumerable<Row> sortedColumns = Rows.OrderBy(x => x.Weight);
+            IEnumerable<Row> sortedRows = Rows.OrderBy(x => x.Weight);
 
-            foreach (Row col in sortedColumns)
+            foreach (Row col in sortedRows)
             {
 
-                IEnumerable<Stack> sortedPiles = col.GetPiles().OrderBy(x => x.Weight);
+                IEnumerable<Stack> sortedStacks = col.GetStacks().OrderBy(x => x.Weight);
 
-                foreach (Stack p in sortedPiles)
+                foreach (Stack p in sortedStacks)
                 {
                     if (p.LoadValuableContainer(c) != true) continue;
                     if (CheckLoadedValuableContainersAgain() == true)
@@ -104,7 +104,7 @@ namespace ContainerVervoer
             foreach (Container con in _loadedContainerList)
             {
                 if (!con.Type.Equals(ContainerType.Valuable)) continue;
-                Row col = con.Pile.GetColumnPile();
+                Row col = con.Stack.row();
 
                 if (!col.ValuableContainerCheck(con))
                 {
@@ -136,16 +136,16 @@ namespace ContainerVervoer
             return _loadedContainerList;
         }
 
-        private void SetColumnToLeftOrRight()
+        private void SetRowToLeftOrRight()
         {
             double middleRow = MiddleRow();
             foreach (Row c in Rows)
             {
-                if (c.Columnrow < middleRow)
+                if (c.row < middleRow)
                 {
                     c.Side = Side.Left;
                 }
-                else if (c.Columnrow > middleRow)
+                else if (c.row > middleRow)
                 {
                     c.Side = Side.Right;
                 }

@@ -4,73 +4,13 @@ using ContainerVervoer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Container = ContainerVervoer.Container;
 
-namespace Containerschip_TestProject
+namespace ContainerTests
 {
     [TestClass]
     public class ContainerTests
     {
         [TestMethod]
-        public void CreateShipColumns()
-        {
-            Ship ship = new Ship(5, 10);
-            Ship ship2 = new Ship(10, 5);
-            Assert.AreEqual(5, ship.GetColumns().Count());
-            Assert.AreEqual(10, ship2.GetColumns().Count());
-        }
-
-        [TestMethod]
-        public void CreateShipColumnPiles()
-        {
-            Ship ship = new Ship(5, 10);
-            Ship ship2 = new Ship(10, 5);
-            List<Row> columnList = (List<Row>)ship.GetColumns();
-            List<Row> columnList2 = (List<Row>)ship2.GetColumns();
-
-            for (int i = 0; i < 5; i++)
-            {
-                Assert.AreEqual(10, columnList[i].GetPiles().Count());
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                Assert.AreEqual(5, columnList2[i].GetPiles().Count());
-            }
-        }
-
-        [TestMethod]
-        public void PileWeightOnTopOfBottomContainer()
-        {
-            Stack pile = new Stack(1, new Row(1, 1, 1));
-
-            for (int i = 0; i < 4; i++)
-            {
-                Container container = new Container(20000, ContainerType.Normal);
-                pile.AddContainer(container, i);
-            }
-
-            Assert.AreEqual(60000, pile.WeightOnTopOfBottomContainer());
-        }
-
-        [TestMethod]
-        public void ColumnWeight()
-        {
-            Ship ship = new Ship(5, 10);
-            List<Row> columnList = (List<Row>)ship.GetColumns();
-            List<Stack> pileList = columnList[0].GetPiles();
-
-            for (int i = 1; i < 4; i++)
-            {
-                for (int y = 1; y < 4; y++)
-                {
-                    Container container = new Container(20000, ContainerType.Normal);
-                    pileList[i].AddContainer(container, y);
-                }
-            }
-
-            Assert.AreEqual(60000 * 3, columnList[0].CalculateWeightInColumn());
-        }
-
-        [TestMethod]
-        public void PlaceCooledContainersOnOnePile()
+        public void PlaceCooledContainersOnOneStack()
         {
             Ship ship = new Ship(1, 2);
 
@@ -88,7 +28,7 @@ namespace Containerschip_TestProject
         }
 
         [TestMethod]
-        public void PlaceNormalContainersOnOnePile()
+        public void PlaceNormalContainersOnOneStack()
         {
             Ship ship = new Ship(1, 1);
 
@@ -106,7 +46,7 @@ namespace Containerschip_TestProject
         }
 
         [TestMethod]
-        public void PlaceNormalContainersOnMultiplePiles()
+        public void PlaceNormalContainersOnMultipleStacks()
         {
             Ship ship = new Ship(3, 2);
 
@@ -124,7 +64,7 @@ namespace Containerschip_TestProject
         }
 
         [TestMethod]
-        public void PlaceNormalContainersOnThreePiles()
+        public void PlaceNormalContainersOnThreeStacks()
         {
             Ship ship = new Ship(3, 1);
 

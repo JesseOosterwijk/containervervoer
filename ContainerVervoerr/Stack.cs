@@ -7,24 +7,24 @@ namespace ContainerVervoer
     {
         public int X { get; private set; }
         public int Weight { get; private set; }
-        private Row Column { get; }
+        private Row Row { get; }
         internal readonly List<Container> _containerList = new List<Container>();
 
-        public Stack(int x, Row column)
+        public Stack(int x, Row row)
         {
             X = x;
-            Column = column;
+            Row = row;
         }
 
-        public Row GetColumnPile()
+        public Row row()
         {
-            return Column;
+            return Row;
         }
 
         public void AddContainer(Container container, int y)
         {
             container.SetHeightPosition(y);
-            container.Pile = this;
+            container.Stack = this;
 
             Weight = Weight + container.Weight;
             _containerList.Add(container);
@@ -56,7 +56,7 @@ namespace ContainerVervoer
             }
             else
             {
-                int y = HeightOfPile() + 1;
+                int y = HeightOfStack() + 1;
                 AddContainer(c, y);
                 return true;
             }
@@ -70,7 +70,7 @@ namespace ContainerVervoer
             }
             else
             {
-                int y = HeightOfPile() + 1;
+                int y = HeightOfStack() + 1;
                 AddContainer(c, y);
                 return true;
             }
@@ -89,8 +89,8 @@ namespace ContainerVervoer
             }
             else
             {
-                if (!Column.IsContainerAccessible(this)) return false;
-                AddContainer(c, HeightOfPile() + 1);
+                if (!Row.IsContainerAccessible(this)) return false;
+                AddContainer(c, HeightOfStack() + 1);
                 return true;
             }
 
@@ -99,11 +99,11 @@ namespace ContainerVervoer
         private bool ContainerUnderneathIsValueable()
         {
             if (_containerList.Count == 0) return false;
-            Container c = _containerList.Find(x => x.Y == HeightOfPile());
+            Container c = _containerList.Find(x => x.Y == HeightOfStack());
             return c.Type.Equals(ContainerType.Valuable);
         }
 
-        public int HeightOfPile()
+        public int HeightOfStack()
         {
             return _containerList.Count == 0 ? 0 : _containerList.Max(container => container.Y);
         }
